@@ -26,7 +26,7 @@ def call(String yamlName) {
             stage("GIT") {
             steps {
                 step([$class: 'WsCleanup'])
-                checkout scm
+                //checkout scm
                 sh 'mkdir -p helm-chart'
                 dir('helm-chart') {
                     git url: "https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
