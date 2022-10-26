@@ -21,8 +21,11 @@ def call(String name) {
             stage("Env Variable") {
                steps {
                  script {
-                   sh "git version"  
-                   sh "git rev-parse --short HEAD"
+                   sh "git init"  
+                   sh "git rev-parse --short HEAD > .git/commit"
+                   sh "basename `git rev-parse --show-toplevel` > .git/image"
+                   COMMIT = readFile('.git/commit').trim()
+                   echo "COMMIT ID is $COMMIT"
                  }
                }
             }
