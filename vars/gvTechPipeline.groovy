@@ -13,7 +13,7 @@ def call(String name) {
                    step([$class: 'WsCleanup'])
                    git url: "https://github.com/gourav-bhardwaj/govtech-api-gateway.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
                    script {
-                   currentWork = (sh "pwd")
+                   currentWork = sh "pwd"
                    sh "git init $currentWork/govtech-api-gateway"
                    sh "git --version"
                    sh "git fetch --no-tags --force --progress -- https://github.com/gourav-bhardwaj/govtech-api-gateway.git +refs/heads/dev:refs/remotes/origin/dev"
