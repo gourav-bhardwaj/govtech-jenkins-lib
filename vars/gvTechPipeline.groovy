@@ -21,7 +21,8 @@ def call(String name) {
             stage("Env Variable") {
                steps {
                  script {
-                   sh "git version"
+                   sh "git version"  
+                   sh "git rev-parse --short HEAD"
                  }
                }
             }
