@@ -4,6 +4,9 @@
 def call(String name) {
     pipeline {
         agent any
+        tools {
+            gradle 'mygradle'
+        }
         stages {
             stage("GIT") {
                steps {
