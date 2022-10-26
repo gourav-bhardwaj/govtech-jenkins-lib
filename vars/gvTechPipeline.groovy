@@ -22,7 +22,6 @@ def call(String name) {
                steps {
                  script {
                    sh "git config --global init.defaultBranch master"
-                   sh "git branch -m master"
                    sh "git init"  
                    sh "git rev-parse --short HEAD > .git/commit"
                    sh "basename `git rev-parse --show-toplevel` > .git/image"
