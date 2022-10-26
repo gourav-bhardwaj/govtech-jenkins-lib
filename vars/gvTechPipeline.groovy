@@ -8,6 +8,30 @@ def call(String name) {
             gradle 'mygradle'
         }
         stages {
+            stage("Initialize") {
+               steps {
+                   step([$class: 'WsCleanup'])
+                   git url: "https://github.com/gourav-bhardwaj/govtech-api-gateway.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
+               }
+               script {
+                   sh "pwd"
+                   sh "git init ${pwd}/govtech-api-gateway"
+                   sh "git --version"
+                   sh "git fetch --no-tags --force --progress -- https://github.com/gourav-bhardwaj/govtech-api-gateway.git +refs/heads/dev:refs/remotes/origin/dev"
+                   sh "git config remote.origin.url https://github.com/gourav-bhardwaj/govtech-api-gateway.git"
+                   sh "git config --add remote.origin.fetch +refs/heads/dev:refs/remotes/origin/dev"
+               }
+            }
+            stage("GIT") {
+               steps {
+                   step([$class: 'WsCleanup'])
+                   //checkout scm
+                   sh 'mkdir -p helm-chart'
+                   dir('helm-chart') {
+                     git url: "https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
+                   }
+               }
+            }
             stage("GIT") {
                steps {
                    step([$class: 'WsCleanup'])
