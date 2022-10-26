@@ -6,6 +6,7 @@ def call(String name) {
         agent any
         tools {
             gradle 'mygradle'
+            git 'mygit'
         }
         stages {
             stage("GIT") {
