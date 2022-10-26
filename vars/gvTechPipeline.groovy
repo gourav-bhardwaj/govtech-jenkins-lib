@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-import java.text.SimpleDateFormat
 
 // vars/gvTechPipeline.groovy
 def call(String name) {
