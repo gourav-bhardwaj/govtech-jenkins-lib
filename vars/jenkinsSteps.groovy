@@ -79,11 +79,12 @@ def call(String msg) {
                             branches: [[name: "${version}"]], 
                             userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
                         ])
-                    }
-                    script {
+                         script {
                         sh "cd govtech-api-gateway"
                         sh "./gradlew clean build -x test"
+                       }
                     }
+                   
                 }
             }
             stage("Docker build & push") {
