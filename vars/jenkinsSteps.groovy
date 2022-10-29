@@ -77,7 +77,7 @@ def call(String msg) {
                          script {
                              checkout([
                             $class: 'GitSCM', 
-                            branches: [[name: "${version}"]], 
+                            branches: [[name: "dev"]], 
                             userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
                         ])
                         sh "cd govtech-api-gateway"
