@@ -27,10 +27,15 @@ def call(String msg) {
             stage("GIT") {
             steps {
                 step([$class: 'WsCleanup'])
-                checkout scm
                 sh 'mkdir -p helm-chart'
                 dir('helm-chart') {
-                    git url: "https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
+                   checkout(
+                        [
+                        $class: 'GitSCM', 
+                        branches: [[name: 'dev']], 
+                        userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git']]
+                        ]
+                    )
                 }
             }
             }
