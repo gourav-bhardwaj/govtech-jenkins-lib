@@ -82,7 +82,7 @@ def call(String msg) {
                         ])
                         //sh "cd govtech-api-gateway"
                         sh "ls -ltr"
-                        //sh "./gradlew clean build -x test"
+                        sh "./gradlew clean build -x test"
                        }
                 }
             }
