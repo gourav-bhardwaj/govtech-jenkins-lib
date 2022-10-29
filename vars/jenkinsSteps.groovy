@@ -1,5 +1,7 @@
 #!/usr/bin/env groovy
 
+import java.text.SimpleDateFormat
+
 // vars/jenkinsSteps.groovy
 def call(String msg) {
     def date = new Date()
