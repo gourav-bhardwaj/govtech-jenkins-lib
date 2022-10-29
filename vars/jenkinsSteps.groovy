@@ -81,7 +81,7 @@ def call(String msg) {
                             userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
                         ])
                         sh "cd govtech-api-gateway"
-                        sh "./gradlew clean build -x test"
+                        //sh "./gradlew clean build -x test"
                        }
                 }
             }
