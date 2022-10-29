@@ -80,7 +80,7 @@ def call(String msg) {
                             branches: [[name: "dev"]], 
                             userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
                         ])
-                        sh "cd govtech-api-gateway"
+                        //sh "cd govtech-api-gateway"
                         sh "ls -ltr"
                         //sh "./gradlew clean build -x test"
                        }
