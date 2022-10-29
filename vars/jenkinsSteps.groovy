@@ -73,12 +73,14 @@ def call(String msg) {
             }
             stage("Package and Build") {
                 steps {
-                    script {
+                    step {
                         checkout([
                             $class: 'GitSCM', 
                             branches: [[name: "${version}"]], 
                             userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
                         ])
+                    }
+                    script {
                         sh "cd govtech-api-gateway"
                         sh "./gradlew clean build -x test"
                     }
