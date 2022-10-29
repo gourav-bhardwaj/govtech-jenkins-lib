@@ -72,21 +72,27 @@ def call(String msg) {
             }
             }
             stage("Package and Build") {
-            steps {
-                script {
-                sh "gradle clean build -x test"
+                steps {
+                    script {
+                        checkout([
+                            $class: 'GitSCM', 
+                            branches: [[name: "${version}"]], 
+                            userRemoteConfigs: [[url: 'https://github.com/gourav-bhardwaj/govtech-api-gateway.git']]
+                        ])
+                        sh "cd govtech-api-gateway"
+                        sh "./gradlew clean build -x test"
+                    }
                 }
-            }
             }
             stage("Docker build & push") {
-            steps {
-                script {
-                withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "") {
-                    sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
-                    sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
-            }
+                steps {
+                    script {
+                        withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "") {
+                            sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
+                            sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
+                        }
+                    }
                 }
-            }
             }
             stage("Helm Deploy") {
             steps {
