@@ -54,7 +54,7 @@ def call() {
                 script {
                   sh "pwd"
                   sh "ls -ltr"
-                  sh "gradle clean build -x test"
+                  sh "./gradlew clean build -x test"
                 }
               }
             }
