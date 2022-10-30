@@ -38,6 +38,17 @@ def call() {
             gradle 'mygradle'
         }
         stages {
+            stage("GIT") {
+               steps {
+                   step([$class: 'WsCleanup'])
+                   checkout scm
+                   git url: "https://github.com/gourav-bhardwaj/govtech-api-gateway.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
+                   sh 'mkdir -p helm-chart'
+                   dir('helm-chart') {
+                     git url: "https://github.com/gourav-bhardwaj/govtech-helm-chart-app.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
+                   }
+               }
+            }
             stage("Docker build & push") {
               steps {
                 script {
