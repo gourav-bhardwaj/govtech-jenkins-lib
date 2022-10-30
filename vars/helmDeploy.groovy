@@ -52,6 +52,8 @@ def call() {
             stage("Package and Build") {
               steps {
                 script {
+                  sh "pwd"
+                  sh "ls -ltr"
                   sh "gradle clean build -x test"
                 }
               }
