@@ -49,6 +49,13 @@ def call() {
                    }
                }
             }
+            stage("Package and Build") {
+              steps {
+                script {
+                  sh "gradle clean build -x test"
+                }
+              }
+            }
             stage("Docker build & push") {
               steps {
                 script {
