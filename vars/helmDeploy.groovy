@@ -21,7 +21,7 @@ def helmDeployStep() {
 
 def dockerBuildAndPush() {
     String DOCKER_CREDENTIALS_ID = "GOV_DOCKER_CRED"
-    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_USER', usernameVariable: 'DOCKER_PASS')]) {
+    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
         sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
         sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
