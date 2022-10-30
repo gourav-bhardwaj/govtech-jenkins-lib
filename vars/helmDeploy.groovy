@@ -1,8 +1,8 @@
-String BUILD_TIMESTAMP = "10-29-2022"
-String version = "11"
-String BRANCH_NAME = "dev"
-String DOCKER_REGISTRY = "govkumardocker"
-String application = "govtech-api-gateway"
+def BUILD_TIMESTAMP = "10-29-2022"
+def version = "11"
+def BRANCH_NAME = "dev"
+def DOCKER_REGISTRY = "govkumardocker"
+def application = "govtech-api-gateway"
 
 def helmDeployStep() {
     String KUBE_CONTEXT = "kubernetes-admin@kubernetes"
