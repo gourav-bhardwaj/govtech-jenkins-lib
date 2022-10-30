@@ -1,3 +1,3 @@
-def checkHekmVersion() {
+def call() {
     sh "helm version"
 }
