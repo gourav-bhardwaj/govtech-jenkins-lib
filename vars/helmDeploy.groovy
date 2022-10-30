@@ -11,7 +11,7 @@ def call() {
     String jobName = application
     String NAMESPACE = BRANCH_NAME
 
-    sh "helm version"
+    //sh "helm version"
     pipeline {
         agent any
         tools {
