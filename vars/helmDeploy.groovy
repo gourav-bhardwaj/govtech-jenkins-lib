@@ -8,7 +8,7 @@ def helmDeployStep() {
     String KUBE_CREDENTIAL_ID = "GOV_KUBE_CONFIG"
     String HELM_FILENAME = "deploy-dev"
     String jobName = application
-    String NAMESPACE = BRANCH_NAME
+    String NAMESPACE = "gv-tech"
 
      withCredentials([file(credentialsId: "${KUBE_CREDENTIAL_ID}", variable: 'KUBECONFIG_CONTENT')]) {
         sh "pwd"
