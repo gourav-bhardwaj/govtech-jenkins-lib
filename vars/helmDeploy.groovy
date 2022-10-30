@@ -1,16 +1,14 @@
-def BUILD_TIMESTAMP = "10-29-2022"
-def version = "11"
-def BRANCH_NAME = "dev"
-def DOCKER_REGISTRY = "govkumardocker"
-def application = "govtech-api-gateway"
-
 def helmDeployStep() {
     String KUBE_CONTEXT = "kubernetes-admin@kubernetes"
     String KUBE_CREDENTIAL_ID = "GOV_KUBE_CONFIG"
     String HELM_FILENAME = "deploy-dev"
     String jobName = application
     String NAMESPACE = BRANCH_NAME
-    
+    String BUILD_TIMESTAMP = "10-29-2022"
+    String version = "11"
+    String BRANCH_NAME = "dev"
+    String DOCKER_REGISTRY = "govkumardocker"
+    String application = "govtech-api-gateway"
      withCredentials([file(credentialsId: "${KUBE_CREDENTIAL_ID}", variable: 'KUBECONFIG_CONTENT')]) {
         sh "pwd"
         sh "ls -ltr"
@@ -21,6 +19,11 @@ def helmDeployStep() {
 
 def dockerBuildAndPush() {
     String DOCKER_CREDENTIALS_ID = "GOV_DOCKER_CRED"
+    String BUILD_TIMESTAMP = "10-29-2022"
+    String version = "11"
+    String BRANCH_NAME = "dev"
+    String DOCKER_REGISTRY = "govkumardocker"
+    String application = "govtech-api-gateway"
     withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
         sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
         sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
