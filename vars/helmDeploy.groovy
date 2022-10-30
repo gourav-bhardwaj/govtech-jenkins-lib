@@ -19,7 +19,7 @@ def helmDeployStep() {
     }
 }
 
-def demo() {
+def dockerBuildAndPush() {
     String DOCKER_CREDENTIALS_ID = "GOV_DOCKER_CRED"
     withDockerRegistry(credentialsId: "${DOCKER_CREDENTIALS_ID}", url: "") {
         sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
