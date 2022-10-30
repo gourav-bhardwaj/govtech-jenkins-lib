@@ -41,7 +41,7 @@ def call() {
             stage("GIT") {
                steps {
                    step([$class: 'WsCleanup'])
-                   checkout scm
+                   //checkout scm
                    git url: "https://github.com/gourav-bhardwaj/govtech-api-gateway.git", branch: 'dev', credentialsId: 'govtech-git-cred-id'
                    sh 'mkdir -p helm-chart'
                    dir('helm-chart') {
