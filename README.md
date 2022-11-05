@@ -2,5 +2,5 @@
 
 ## Now we can use it like given below in Jenkinsfile
 
-@Library('govtech-jenkins-lib') _\n
+@Library('govtech-jenkins-lib') _
 helmDeploy()
