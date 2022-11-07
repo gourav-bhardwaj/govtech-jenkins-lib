@@ -2,7 +2,7 @@ def helmDeployStep(gcpProject) {
     String BUILD_TIMESTAMP = "10-29-2022"
     String version = "11"
     String BRANCH_NAME = "dev"
-    String DOCKER_REGISTRY = "gcr.io"
+    String DOCKER_REGISTRY = "gourav-bhardwaj"
     String application = "govtech-api-gateway"
     String KUBE_CONTEXT = "kubernetes-admin@kubernetes"
     String KUBE_CREDENTIAL_ID = "GOV_KUBE_CONFIG"
@@ -14,7 +14,7 @@ def helmDeployStep(gcpProject) {
         sh "pwd"
         sh "ls -ltr"
         sh "helm version --kubeconfig ${KUBECONFIG_CONTENT} --kube-context ${KUBE_CONTEXT}"
-        sh "helm upgrade --install --namespace ${NAMESPACE} ${jobName} helm-chart/spring-boot -f values/${HELM_FILENAME}.yaml --set image.repository=${DOCKER_REGISTRY}/${gcpProject}/${application},image.tag=${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} --kubeconfig ${KUBECONFIG_CONTENT} --kube-context ${KUBE_CONTEXT} --debug --atomic"
+        sh "helm upgrade --install --namespace ${NAMESPACE} ${jobName} helm-chart/spring-boot -f values/${HELM_FILENAME}.yaml --set image.repository=${DOCKER_REGISTRY}/${application},image.tag=${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} --kubeconfig ${KUBECONFIG_CONTENT} --kube-context ${KUBE_CONTEXT} --debug --atomic"
     }
 }
 
@@ -23,12 +23,12 @@ def dockerBuildAndPush(gcpProject) {
     String BUILD_TIMESTAMP = "10-29-2022"
     String version = "11"
     String BRANCH_NAME = "dev"
-    String DOCKER_REGISTRY = "gcr.io"
+    String DOCKER_REGISTRY = "gourav-bhardwaj"
     String application = "govtech-api-gateway"
     withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-        //sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} https://index.docker.io/v1/"
-        sh "docker build -t ${DOCKER_REGISTRY}/${gcpProject}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
-        sh "docker push ${DOCKER_REGISTRY}/${gcpProject}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
+        sh "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} https://index.docker.io/v1/"
+        sh "docker build -t ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME} ."
+        sh "docker push ${DOCKER_REGISTRY}/${application}:${BUILD_TIMESTAMP}.${version}.${BRANCH_NAME}"
     }
 }
 
