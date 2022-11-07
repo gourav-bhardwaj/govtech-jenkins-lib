@@ -1,4 +1,4 @@
-def helmDeployStep(gcpProject) {
+def helmDeployStep() {
     String BUILD_TIMESTAMP = "10-29-2022"
     String version = "11"
     String BRANCH_NAME = "dev"
@@ -18,7 +18,7 @@ def helmDeployStep(gcpProject) {
     }
 }
 
-def dockerBuildAndPush(gcpProject) {
+def dockerBuildAndPush() {
     String DOCKER_CREDENTIALS_ID = "GOV_DOCKER_CRED"
     String BUILD_TIMESTAMP = "10-29-2022"
     String version = "11"
@@ -37,9 +37,6 @@ def call() {
         agent any
         tools {
             gradle 'mygradle'
-        }
-        environment {
-           GCP_PROJECT_NAME = credentials('my-gcp-project')
         }
         stages {
             stage("GIT") {
@@ -65,14 +62,14 @@ def call() {
             stage("Docker build & push") {
               steps {
                 script {
-                  dockerBuildAndPush(GCP_PROJECT_NAME)
+                  dockerBuildAndPush()
                 }
               }
             }
             stage("Helm Deploy") {
                 steps {
                     script {
-                       helmDeployStep(GCP_PROJECT_NAME)
+                       helmDeployStep()
                     }
                 }
             }
